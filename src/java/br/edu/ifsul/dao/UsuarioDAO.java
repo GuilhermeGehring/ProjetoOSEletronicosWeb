@@ -1,23 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.edu.ifsul.dao;
 
 import br.edu.ifsul.modelo.Usuario;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import javax.ejb.Stateful;
 
-/**
- *
- * @author guilherme
- */
+@Stateful
 public class UsuarioDAO extends DAOGenerico<Usuario> implements Serializable {
     
     public UsuarioDAO() {
         super(Usuario.class);
+    }
+
+    @Override
+    public List<Usuario> getListaObjetos() {              
+        String jpql = "from Usuarios";
+        return em.createQuery(jpql).getResultList();    
     }
         
     @Override
@@ -29,6 +28,7 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements Serializable {
                 return usuario;
         return usuarios.get(0);
         
-    }   
+    }
+    
     
 }

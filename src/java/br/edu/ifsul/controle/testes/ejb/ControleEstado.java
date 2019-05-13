@@ -32,7 +32,7 @@ public class ControleEstado implements Serializable {
 
         public void alterar(Object id){
                 try {
-                        objeto = dao.getObjectById(id);            
+                        objeto = (Estado) dao.getObjectById(id);            
                 } catch (Exception e){
                         Util.mensagemErro("Erro ao recuperar objeto: " + 
                                         Util.getMensagemErro(e));
@@ -41,7 +41,7 @@ public class ControleEstado implements Serializable {
 
         public void excluir(Object id){
                 try {
-                        objeto = dao.getObjectById(id);
+                        objeto = (Estado) dao.getObjectById(id);
                         dao.remover(objeto);
                         Util.mensagemInformacao("Objeto removido com sucesso!");
                 } catch (Exception e){
