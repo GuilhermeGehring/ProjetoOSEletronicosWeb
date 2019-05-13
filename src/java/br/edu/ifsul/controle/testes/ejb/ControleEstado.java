@@ -1,25 +1,26 @@
-package br.edu.ifsul.controle;
+package br.edu.ifsul.controle.testes.ejb;
 
 import br.edu.ifsul.dao.EstadoDAO;
 import br.edu.ifsul.modelo.Estado;
 import br.edu.ifsul.util.Util;
 import java.io.Serializable;
 import javax.ejb.EJB;
-import javax.faces.view.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 
 @Named(value = "controleEstado")
-@ViewScoped
+@SessionScoped
 public class ControleEstado implements Serializable {
 
         @EJB
-        private EstadoDAO dao;
-        
         private Estado objeto;
+        
+        private EstadoDAO dao;
 
         public ControleEstado(){
 
         }
+
 
         public String listar(){
                 return "/privado/estado/listar?faces-redirect=true";
@@ -28,8 +29,6 @@ public class ControleEstado implements Serializable {
         public void novo(){
                 objeto = new Estado();        
         }
-
-
 
         public void alterar(Object id){
                 try {
@@ -72,5 +71,4 @@ public class ControleEstado implements Serializable {
         public Estado getObjeto() {
         return objeto;
         }
-    
 }

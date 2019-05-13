@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <ui:composition template="/templates/template.xhtml">
+        <ui:define name="titulo">Manutenção de Usuários</ui:define>
+        <ui:define name="conteudo">
+            <h:form id="formListagem" prependId="false">
+                <p:growl/>
+                <p:commandButton value="Novo" actionListener="#{controleUsuario.novo()}"
+                                 icon="ui-icon-plus"
+                                 update="formEdicao"
+                                 process="@this"
+                                 oncomplete="PF('dlg').show();"/>
+                <p:dataTable value="#{controleUsuario.dao.listaObjetos}" var="obj"
+                             id="listagem">
+                    <f:facet name="footer">
+                        <p:outputLabel value=""/>
+                    </f:facet>   
+
+                    <p:column headerText="Nome do Usuário">
+                        <p:outputLabel value="#{obj.nomeUsuario}"/>
+                    </p:column>
+                    <p:column headerText="Nome">
+                        <p:outputLabel value="#{obj.nome}"/>
+                    </p:column>
+                    <p:column headerText="Email">
+                        <p:outputLabel value="#{obj.email}"/>
+                    </p:column>
+                    <p:column headerText="Ações">
+                        <div align="center">
+                            <p:commandButton actionListener="#{controleUsuario.alterar(obj.id)}"
+                                             icon="ui-icon-pencil"
+                                             title="Editar"
+                                             update="formEdicao"
+                                             process="@this"
+                                             oncomplete="PF('dlg').show();"/>
+                            <p:commandButton actionListener="#{controleUsuario.excluir(obj.id)}"
+                                             icon="ui-icon-trash"
+                                             update="@form"
+                                             process="@this"
+                                             title="Remover"
+                                             onclick="if (!confirm('Confirma a exclusão?'))
+                                                         return false"/>
+                        </div>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+            <p:dialog header="Edição" widgetVar="dlg" resizable="false"
+                      modal="true" width="50%" height="100%">
+                <h:form id="formEdicao" prependId="false">
+                    <p:growl id="growl"/>
+                    <div align="center">
+                        <p:panelGrid columns="2">
+                            <p:outputLabel value="ID"/>
+                            <p:inputText value="#{controleUsuario.objeto.nomeUsuario}" size="100"
+                                         readonly="true"/>
+                            <p:outputLabel value="Nome de Usuário" for="txtNomeUsuario"/>
+                            <p:inputText value="#{controleUsuario.objeto.nomeUsuario}"
+                                         size="75" maxlength="100"
+                                         id="txtNomeUsuario"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Senha" for="txtSenha"/>
+                            <p:inputText value="#{controleUsuario.objeto.senha}"
+                                         size="75" maxlength="100"
+                                         id="txtSenha"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
+                            <p:calendar value="#{controleUsuario.objeto.dataCadastro}"
+                                         id="txtDataCadastro"
+                                         locale="pt_BR"
+                                         pattern="dd/MM/yyyy"
+                                         mask="true"                                         
+                                         navigator="true"
+                                         required="true"
+                                         placeholder="Obrigatório"
+                                         converter="converterCalendar">                                
+                            </p:calendar>
+                            <p:outputLabel value="Nome" for="txtNome"/>
+                            <p:inputText value="#{controleUsuario.objeto.nome}"
+                                         size="75" maxlength="100"
+                                         id="txtNome"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="E-mail" for="txtEmail"/>
+                            <p:inputText value="#{controleUsuario.objeto.email}"
+                                         size="75" maxlength="100" 
+                                         id="txtEmail"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Telefone Principal" for="txtTelefonePrincipal"/>
+                            <p:inputText value="#{controleUsuario.objeto.telefonePrincipal}"
+                                         size="75" maxlength="100" 
+                                         id="txtTelefonePrincipal"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Telefone Secundario" for="txtTelefoneSecundario"/>
+                            <p:inputText value="#{controleUsuario.objeto.telefoneSecundario}"
+                                         size="75" maxlength="100" 
+                                         id="txtTelefoneSecundario"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
+                        </p:panelGrid>
+                    </div>
+
+                    <p:panel>
+                        <div align="center">
+                            <p:commandButton value="Salvar"
+                                             icon="ui-icon-disk"
+                                             actionListener="#{controleUsuario.salvar()}"
+                                             update="formEdicao formListagem"
+                                             oncomplete="if(!args.validationFailed) {PF('dlg').hide();}"/>
+                        </div>
+                    </p:panel>
+                </h:form>
+            </p:dialog>            
+        </ui:define>
+    </ui:composition>
+</html>

@@ -21,8 +21,14 @@
                         <p:submenu label="Básicos">
                             <p:menuitem action="#{controleEstado.listar()}"
                                         value="Manutenção de Estados"
-                                        ajax="false"/>                                  
-                        </p:submenu>                     
+                                        ajax="false"/>
+                            <p:menuitem action="#{controleUsuario.listar()}"
+                                        value="Manutenção de Usuaŕios"
+                                        ajax="false"/>
+                            <p:menuitem action="#{controlePessoaFisica.listar()}"
+                                        value="Manutenção de Pessoas"
+                                        ajax="false"/>
+                        </p:submenu>                        
                     </p:column>
                 </p:submenu>   
                 
