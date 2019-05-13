@@ -61,7 +61,10 @@ public class DAOGenerico<TipoGenerics> implements Serializable {
         String jpql = "from " + classePersistente.getSimpleName() + " order by " + ordemAtual.getAtributo();
         return em.createQuery(jpql).getResultList();
     }
-    /*public List<TipoGenerics> getListaObjetos() {
+    
+    /*
+    // getListas sem filtro
+    public List<TipoGenerics> getListaObjetos() {
        
         String jpql = "from " + classePersistente.getSimpleName();
         return em.createQuery(jpql).getResultList();

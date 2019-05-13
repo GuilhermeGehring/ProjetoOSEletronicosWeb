@@ -18,7 +18,6 @@ public class ControleEstado implements Serializable {
     private Estado objeto;
 
     public ControleEstado(){
-
     }
 
     public String listar(){
