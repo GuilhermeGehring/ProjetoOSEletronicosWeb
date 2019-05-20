@@ -1,4 +1,4 @@
-package br.edu.ifsul.converters;
+package br.edu.ifsul.converter;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;

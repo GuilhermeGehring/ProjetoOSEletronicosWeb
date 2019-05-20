@@ -1,39 +1,35 @@
 package br.edu.ifsul.controle;
 
-import br.edu.ifsul.dao.CidadeDAO;
+import br.edu.ifsul.dao.EquipamentoDAO;
+import br.edu.ifsul.modelo.Equipamento;
+import br.edu.ifsul.util.Util;
 import java.io.Serializable;
 import javax.ejb.EJB;
-import javax.inject.Named;
-import br.edu.ifsul.modelo.Cidade;
-import br.edu.ifsul.util.Util;
 import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
-/**
- *
- * @author Telmo
- */
-@Named(value = "controleCidade")
+@Named(value = "controleEquipamento")
 @ViewScoped
-public class ControleCidade implements Serializable {
+public class ControleEquipamento implements Serializable {
 
     @EJB
-    private CidadeDAO dao;
+    private EquipamentoDAO dao;
 
-    private Cidade objeto;
+    private Equipamento objeto;
 
-    public ControleCidade() {
+    public ControleEquipamento() {
 
     }
 
     public String listar() {
-        return "/privado/cidade/crudcidade?faces-redirect=true";
+        return "/privado/equipamento/crudequipamento?faces-redirect=true";
     }
 
     public void novo() {
-        objeto = new Cidade();
+        objeto = new Equipamento();
     }
 
-    public CidadeDAO getDao() {
+    public EquipamentoDAO getDao() {
         return dao;
     }
 
@@ -71,11 +67,11 @@ public class ControleCidade implements Serializable {
         }
     }
 
-    public Cidade getObjeto() {
+    public Equipamento getObjeto() {
         return objeto;
     }
 
-    public void setObjeto(Cidade objeto) {
+    public void setObjeto(Equipamento objeto) {
         this.objeto = objeto;
     }
 

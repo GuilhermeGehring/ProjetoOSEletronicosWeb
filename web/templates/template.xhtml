@@ -18,25 +18,36 @@
                 <p:menuitem value="Inicio" url="/index.xhtml" icon="ui-icon-home"/>
                 <p:submenu label="Cadastros">
                     <p:column>
-                        <p:submenu label="Básicos">
-                            <p:menuitem action="#{controleEstado.listar()}"
-                                        value="Manutenção de Estados"
-                                        ajax="false"/>
-                            <p:menuitem action="#{controleUsuario.listar()}"
-                                        value="Manutenção de Usuaŕios"
+                        <p:submenu label="Usuários">
+                            <p:menuitem action="#{controleUsu.listar()}"
+                                        value="Manutenção de Usuário"
                                         ajax="false"/>
                             <p:menuitem action="#{controlePessoaFisica.listar()}"
-                                        value="Manutenção de Pessoas"
+                                        value="Manutenção de Pessoa Física"
                                         ajax="false"/>
-                        </p:submenu>                        
+                        </p:submenu>
+                        <p:submenu label="Básicos">
+                            <p:menuitem action="#{controleEstado.listar()}"
+                                        value="Manutenção de Estado"
+                                        ajax="false"/>
+                            <p:menuitem action="#{controleCidade.listar()}"
+                                        value="Manutenção de Cidade"
+                                        ajax="false"/>                            
+                            <p:menuitem action="#{controleMarca.listar()}"
+                                        value="Manutenção de Marcas"
+                                        ajax="false"/>
+                            <p:menuitem action="#{controleEquipamento.listar()}"
+                                        value="Manutenção de Equipamentos"
+                                        ajax="false"/>
+                        </p:submenu>                     
                     </p:column>
                 </p:submenu>   
-                
+
             </p:megaMenu>            
         </h:form>
         <ui:insert name="conteudo">
         </ui:insert>                
         <ui:include src="ajaxstatus.xhtml"/>
     </h:body>
-    
+
 </html>

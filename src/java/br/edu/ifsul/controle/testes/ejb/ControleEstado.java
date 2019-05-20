@@ -1,4 +1,4 @@
-package br.edu.ifsul.controle.testes.ejb;
+/*package br.edu.ifsul.controle.testes.ejb;
 
 import br.edu.ifsul.dao.EstadoDAO;
 import br.edu.ifsul.modelo.Estado;
@@ -71,4 +71,4 @@ public class ControleEstado implements Serializable {
         public Estado getObjeto() {
         return objeto;
         }
-}
+}*/
