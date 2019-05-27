@@ -28,11 +28,8 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements Serializable{
     }
     
     @Override
-    public Usuario getObjectById(Object id) throws Exception {
-        
-        System.out.println("Usuário: " + (Usuario) em.createNamedQuery("getUsuario").setParameter("paramNome", id).getResultList().get(0));
+    public Usuario getObjectById(Object id) throws Exception {                
       return (Usuario) em.createNamedQuery("getUsuario").setParameter("paramNome", id).getResultList().get(0);
-                
     }
     
 }

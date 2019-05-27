@@ -3,18 +3,25 @@ package br.edu.ifsul.converter;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Named;
 
 /**
  * @author Prof. Me. Jorge Luis Boeira Bavaresco
  * @email jorge.bavaresco@passofundo.ifsul.edu.br
  * @organization IFSUL - Campus Passo Fundo
  */
-@FacesConverter(value = "converterCalendar")
+
+@Named(value = "converterCalendar")
+@RequestScoped
 public class ConverterCalendar implements Serializable, Converter{
+
+    public ConverterCalendar() {
+    }       
 
     private SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     

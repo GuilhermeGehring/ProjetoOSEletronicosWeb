@@ -12,6 +12,12 @@
     <class>br.edu.ifsul.modelo.Produto</class>
     <class>br.edu.ifsul.modelo.Arquivo</class>
     <class>br.edu.ifsul.modelo.Equipamento</class>
+    <class>br.edu.ifsul.modelo.OrdemServico</class>
+    <class>br.edu.ifsul.modelo.ContaReceber</class>
+    <class>br.edu.ifsul.modelo.Foto</class>
+    <class>br.edu.ifsul.modelo.ItemProduto</class>
+    <class>br.edu.ifsul.modelo.ItemServico</class>
+    <class>br.edu.ifsul.modelo.Servico</class>
     <properties>
       <property name="hibernate.hbm2ddl.auto" value="update"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>

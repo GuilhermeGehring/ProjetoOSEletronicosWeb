@@ -97,14 +97,12 @@
                     <p:growl id="growl"/>
                     <div align="center">
                         <p:panelGrid columns="2">                            
-                            <p:outputLabel value="ID"/>
-                            <p:inputText value="#{controleUsuario.objeto.nomeUsuario}" size="20"
-                                         readonly="true"/>
                             <p:outputLabel value="Nome de Usuário" for="txtNomeUsuario"/>
                             <p:inputText value="#{controleUsu.objeto.nomeUsuario}"
                                          size="75" maxlength="100"
                                          id="txtNomeUsuario"
                                          required="true"
+                                         readonly="#{controleUsu.isEdit}"
                                          placeholder="Obrigatório"/>
                             <p:outputLabel value="Senha" for="txtSenha"/>
                             <p:inputText value="#{controleUsu.objeto.senha}"
@@ -120,8 +118,8 @@
                                          mask="true"                                         
                                          navigator="true"
                                          required="true"
-                                         placeholder="Obrigatório"
-                                         converter="converterCalendar">                                
+                                         placeholder="Obrigatório">
+                                <f:converter binding="#{converterCalendar}" />
                             </p:calendar>
                             <p:outputLabel value="Nome" for="txtNome"/>
                             <p:inputText value="#{controleUsu.objeto.nome}"
@@ -136,15 +134,19 @@
                                          required="true"
                                          placeholder="Obrigatório"/>
                             <p:outputLabel value="Telefone Principal" for="txtTelefonePrincipal"/>
-                            <p:inputText value="#{controleUsu.objeto.telefonePrincipal}"
-                                         size="75" maxlength="100" 
+                            <p:inputMask value="#{controleUsu.objeto.telefonePrincipal}"
+                                         size="14"
+                                         maxlength="14"
+                                         mask="(99)99999-9999"
                                          id="txtTelefonePrincipal"
                                          required="true"
                                          placeholder="Obrigatório"/>
-                            <p:outputLabel value="Telefone Alternativo" for="txtTelefoneAlternativo"/>
-                            <p:inputText value="#{controleUsu.objeto.telefoneAlternativo}"
-                                         size="75" maxlength="100" 
+                            <p:outputLabel value="Telefone Secundario" for="txtTelefoneAlternativo"/>
+                            <p:inputMask value="#{controleUsu.objeto.telefoneAlternativo}"
+                                         size="14"
+                                         maxlength="14" 
                                          id="txtTelefoneAlternativo"
+                                         mask="(99)99999-9999"
                                          required="true"
                                          placeholder="Obrigatório"/>
                         </p:panelGrid>

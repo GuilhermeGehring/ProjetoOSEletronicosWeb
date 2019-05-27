@@ -38,8 +38,13 @@
                                         ajax="false"/>
                             <p:menuitem action="#{controleEquipamento.listar()}"
                                         value="Manutenção de Equipamentos"
-                                        ajax="false"/>
-                        </p:submenu>                     
+                                        ajax="false"/>                            
+                        </p:submenu>                  
+                        <p:submenu label="Ordens de Serviço">
+                            <p:menuitem action="#{controleOrdemServico.listar()}"
+                                        value="Manutenção de Ordens de Serviço"
+                                        ajax="false"/>    
+                        </p:submenu>
                     </p:column>
                 </p:submenu>   
 

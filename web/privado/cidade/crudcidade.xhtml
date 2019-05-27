@@ -98,12 +98,12 @@
                             <p:inputText value="#{controleCidade.objeto.nome}"
                                          size="50" maxlength="50" id="txtNome"
                                          placeholder="Obrigatório"/>
-                                    <p:outputLabel for="estado" value="Estado:" />
-                                    <p:selectOneMenu id="estado" value="#{controleCidade.objeto.estado}" effect="fold" editable="false">
-                                        <f:selectItem itemLabel="Selecione" itemValue="Selecione"/>
-                                        <f:selectItems value="#{controleEstado.dao.listaTodos}"  var="est" itemLabel="#{est.nome}" />
-                                        <f:converter binding="#{converterEstado}" />
-                                    </p:selectOneMenu>
+                            <p:outputLabel for="estado" value="Estado:" />
+                            <p:selectOneMenu id="estado" value="#{controleCidade.objeto.estado}" effect="fold" editable="false">
+                                <f:selectItem itemLabel="Selecione" itemValue="Selecione"/>
+                                <f:selectItems value="#{controleEstado.dao.listaTodos}"  var="est" itemLabel="#{est.nome}" />
+                                <f:converter binding="#{converterEstado}" />
+                            </p:selectOneMenu>
                         </p:panelGrid>
                     </div>
 

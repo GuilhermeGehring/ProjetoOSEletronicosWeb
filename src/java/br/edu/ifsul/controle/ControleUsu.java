@@ -24,6 +24,8 @@ public class ControleUsu implements Serializable {
     private UsuarioDAO dao;
 
     private Usuario objeto;
+    
+    private boolean isEdit = false;
 
     public ControleUsu() {
     }
@@ -34,10 +36,11 @@ public class ControleUsu implements Serializable {
 
     public void novo() {
         setObjeto(new Usuario());
+        isEdit = false;
     }
 
     public Usuario getObjeto() {
-        return objeto;
+        return objeto;        
     }
 
     public void setObjeto(Usuario objeto) {
@@ -50,8 +53,8 @@ public class ControleUsu implements Serializable {
 
     public void alterar(Object id) {
         try {
-            System.out.println("ControleUsu - altera : " + id);
-            //System.out.println(dao.getObjectById(id));
+            isEdit = true;
+            System.out.println("ControleUsu - altera : " + id);            
             setObjeto(dao.getObjectById(id));
             System.out.println("ControleUsu - encontrou : " + getObjeto());
         } catch (Exception e) {
@@ -59,6 +62,17 @@ public class ControleUsu implements Serializable {
                     + Util.getMensagemErro(e));
         }
     }
+    
+    /*public void alterar(Object id){
+        try {
+            isEdit = true;
+            setObjeto(dao.getObjectById(id));
+            System.out.println("ControleUsu - encontrou : " + getObjeto());
+        } catch (Exception e){
+            Util.mensagemErro("Erro ao recuperar objeto: " +                     
+                Util.getMensagemErro(e));
+        } 
+    }*/
 
     public void excluir(Object id) {
         try {
@@ -74,8 +88,13 @@ public class ControleUsu implements Serializable {
     public void salvar() {
         try {
             //id nesse caso não é gerado pelo BD
-            dao.persist(getObjeto());
-            Util.mensagemInformacao("Objeto persistido com sucesso!");
+            if (!getIsEdit()) {
+                dao.persist(getObjeto());
+                Util.mensagemInformacao("Objeto persistido com sucesso!");
+            } else {
+                dao.merge(getObjeto());
+                Util.mensagemInformacao("Objeto alterado com sucesso!");
+            }
         } catch (Exception e) {
             Util.mensagemErro("Erro ao persistir objeto: "
                     + Util.getMensagemErro(e));
@@ -90,5 +109,13 @@ public class ControleUsu implements Serializable {
             return Usuario.class.getSimpleName();
         }
 
+    }
+
+    public boolean getIsEdit() {
+        return isEdit;
+    }
+
+    public void setIsEdit(boolean isEdit) {
+        this.isEdit = isEdit;
     }
 }

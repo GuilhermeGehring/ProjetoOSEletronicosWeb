@@ -20,43 +20,43 @@
                                  process="@this"
                                  oncomplete="PF('dlg').show();"/>                
                 <div align="center">
-                        <p:panelGrid columns="11">
-                                <p:outputLabel value="Ordem: "/>
-                                <p:selectOneMenu value="#{controlePessoaFisica.dao.ordemAtual}" id="selectOrdem"
-                                                                 converter="#{controlePessoaFisica.dao.converterOrdem}">                            
-                                        <f:selectItems value="#{controlePessoaFisica.dao.listaOrdem}"
-                                                       var="ord" itemValue="#{ord.atributo}" itemLabel="#{ord.label}"/>
-                                        <p:ajax update="listagem"/>
-                                </p:selectOneMenu>                         
-                                <p:outputLabel value="Filtro:"/>
-                                <p:inputText value="#{controlePessoaFisica.dao.filtro}">
-                                        <p:ajax update="listagem" event="blur"/>
-                                </p:inputText>
-                                <p:commandButton value="Filtrar" update="listagem"/>
-                                <p:outputLabel value="Máximo de Objetos"/>
-                                <p:inputNumber value="#{controlePessoaFisica.dao.maximoObjetos}" size="3"
-                                                           thousandSeparator="" decimalSeparator="" decimalPlaces="0">
-                                        <p:ajax event="blur" update="listagem"/> 
-                                </p:inputNumber>
-                                <p:commandButton action="#{controlePessoaFisica.dao.primeiro()}" 
-                                                                 title="Primeiro" icon="ui-icon-seek-first" update="listagem"/>
-                                <p:commandButton action="#{controlePessoaFisica.dao.anterior()}" 
-                                                                 title="Anterior" icon="ui-icon-seek-prev" 
-                                                                 update="listagem"/>
-                                <p:commandButton action="#{controlePessoaFisica.dao.proximo()}" 
-                                                                 title="Proximo" icon="ui-icon-seek-next" update="listagem"/>
-                                <p:commandButton action="#{controlePessoaFisica.dao.ultimo()}" 
-                                                                 title="Ultimo" icon="ui-icon-seek-end" update="listagem"/>                          
-                        </p:panelGrid>
+                    <p:panelGrid columns="11">
+                        <p:outputLabel value="Ordem: "/>
+                        <p:selectOneMenu value="#{controlePessoaFisica.dao.ordemAtual}" id="selectOrdem"
+                                         converter="#{controlePessoaFisica.dao.converterOrdem}">                            
+                            <f:selectItems value="#{controlePessoaFisica.dao.listaOrdem}"
+                                           var="ord" itemValue="#{ord.atributo}" itemLabel="#{ord.label}"/>
+                            <p:ajax update="listagem"/>
+                        </p:selectOneMenu>                         
+                        <p:outputLabel value="Filtro:"/>
+                        <p:inputText value="#{controlePessoaFisica.dao.filtro}">
+                            <p:ajax update="listagem" event="blur"/>
+                        </p:inputText>
+                        <p:commandButton value="Filtrar" update="listagem"/>
+                        <p:outputLabel value="Máximo de Objetos"/>
+                        <p:inputNumber value="#{controlePessoaFisica.dao.maximoObjetos}" size="3"
+                                       thousandSeparator="" decimalSeparator="" decimalPlaces="0">
+                            <p:ajax event="blur" update="listagem"/> 
+                        </p:inputNumber>
+                        <p:commandButton action="#{controlePessoaFisica.dao.primeiro()}" 
+                                         title="Primeiro" icon="ui-icon-seek-first" update="listagem"/>
+                        <p:commandButton action="#{controlePessoaFisica.dao.anterior()}" 
+                                         title="Anterior" icon="ui-icon-seek-prev" 
+                                         update="listagem"/>
+                        <p:commandButton action="#{controlePessoaFisica.dao.proximo()}" 
+                                         title="Proximo" icon="ui-icon-seek-next" update="listagem"/>
+                        <p:commandButton action="#{controlePessoaFisica.dao.ultimo()}" 
+                                         title="Ultimo" icon="ui-icon-seek-end" update="listagem"/>                          
+                    </p:panelGrid>
                 </div>	                
-                
+
                 <p:dataTable value="#{controlePessoaFisica.dao.listaObjetos}" var="obj" emptyMessage=""
                              id="listagem">
                     <f:facet name="footer">
                         <p:outputLabel value=""/>
                     </f:facet>   
 
-                    <p:column headerText="cpf">
+                    <p:column headerText="CPF">
                         <p:outputLabel value="#{obj.cpf}"/>
                     </p:column>
                     <p:column headerText="Nome">
@@ -82,22 +82,129 @@
                     <f:facet name="footer">
                         <p:outputLabel value="#{controlePessoaFisica.dao.mensagemNavegacao}"/>
                     </f:facet>   
-                    
+
                 </p:dataTable>
             </h:form>            
             <p:dialog header="Edição" widgetVar="dlg" resizable="false"
                       modal="true" width="50%" height="100%">
                 <h:form id="formEdicao" prependId="false">
                     <p:growl id="growl"/>
-                    <div align="center">
-                        <p:panelGrid columns="2">
-                            <p:outputLabel value="ID"/>
-                            <p:inputText value="#{controlePessoaFisica.objeto.nomeUsuario}" size="5"
-                                         readonly="true"/>
+                    <div align="center">                        
+                        <p:panelGrid columns="2">                            
+                            <p:outputLabel value="Nome de Usuário" for="txtNomeUsuario"/>                            
+                            <p:inputText value="#{controlePessoaFisica.objeto.nomeUsuario}"
+                                         size="75" maxlength="100"
+                                         id="txtNomeUsuario"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Senha" for="txtSenha"/>
+                            <p:inputText value="#{controlePessoaFisica.objeto.senha}"
+                                         size="75" maxlength="100"
+                                         id="txtSenha"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Data de Cadastro" for="txtDataCadastro"/>
+                            <p:calendar value="#{controlePessoaFisica.objeto.dataCadastro}"
+                                        id="txtDataCadastro"
+                                        locale="pt_BR"
+                                        pattern="dd/MM/yyyy"
+                                        mask="true"                                         
+                                        navigator="true"
+                                        required="true"
+                                        placeholder="Obrigatório">
+                                <f:converter binding="#{converterCalendar}" />
+                            </p:calendar>
                             <p:outputLabel value="Nome" for="txtNome"/>
                             <p:inputText value="#{controlePessoaFisica.objeto.nome}"
-                                         size="50" maxlength="50" id="txtNome"
+                                         size="75" maxlength="100"
+                                         id="txtNome"
+                                         required="true"
                                          placeholder="Obrigatório"/>
+                            <p:outputLabel value="E-mail" for="txtEmail"/>
+                            <p:inputText value="#{controlePessoaFisica.objeto.email}"
+                                         size="75" maxlength="100" 
+                                         id="txtEmail"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Telefone Principal" for="txtTelefonePrincipal"/>
+                            <p:inputMask value="#{controlePessoaFisica.objeto.telefonePrincipal}"
+                                         size="14"
+                                         maxlength="14"
+                                         mask="(99)99999-9999"
+                                         id="txtTelefonePrincipal"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Telefone Secundario" for="txtTelefoneAlternativo"/>
+                            <p:inputMask value="#{controlePessoaFisica.objeto.telefoneAlternativo}"
+                                         size="14"
+                                         maxlength="14" 
+                                         id="txtTelefoneAlternativo"
+                                         mask="(99)99999-9999"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="CPF" for="txtCpf"/>
+                            <p:inputMask value="#{controlePessoaFisica.objeto.cpf}"
+                                         size="14"
+                                         maxlength="14"
+                                         mask="999.999.999-99"
+                                         id="txtCpf"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="RG" for="txtRg"/>
+                            <p:inputText value="#{controlePessoaFisica.objeto.rg}"
+                                         size="10" maxlength="10" 
+                                         id="txtRg"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Data de Nascimento" for="txtNascimento"/>
+                            <p:calendar value="#{controlePessoaFisica.objeto.nascimento}"
+                                        id="txtNascimento"
+                                        locale="pt_BR"
+                                        pattern="dd/MM/yyyy"
+                                        mask="true"                                         
+                                        navigator="true"
+                                        required="true"
+                                        placeholder="Obrigatório">
+                                <f:converter binding="#{converterCalendar}" />
+                            </p:calendar>
+                            <p:outputLabel value="Endereço" for="txtEndereco"/>
+                            <p:inputText value="#{controlePessoaFisica.objeto.endereco}"
+                                         size="75" maxlength="100" 
+                                         id="txtEndereco"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Número" for="txtNumero"/>
+                            <p:inputText value="#{controlePessoaFisica.objeto.numero}"
+                                         size="75" maxlength="100" 
+                                         id="txtNumero"
+                                         required="true"
+                                         placeholder="Obrigatório"/>                            
+                            <p:outputLabel value="Complemento" for="txtComplemento"/>
+                            <p:inputText value="#{controlePessoaFisica.objeto.complemento}"
+                                         size="75" maxlength="100" 
+                                         id="txtComplemento"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Cep" for="txtCep"/>
+                            <p:inputMask value="#{controlePessoaFisica.objeto.cep}"
+                                         size="9"
+                                         maxlength="9" 
+                                         id="txtCep"
+                                         mask="99999-999"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel value="Bairro" for="txtBairro"/>
+                            <p:inputText value="#{controlePessoaFisica.objeto.bairro}"
+                                         size="75" maxlength="100" 
+                                         id="txtBairro"
+                                         required="true"
+                                         placeholder="Obrigatório"/>
+                            <p:outputLabel for="cidade" value="Cidade:" />
+                            <p:selectOneMenu id="cidade" value="#{controlePessoaFisica.objeto.cidade}" effect="fold" editable="false">
+                                <f:selectItem itemLabel="Selecione" itemValue="Selecione"/>
+                                <f:selectItems value="#{controleCidade.dao.listaTodos}"  var="cid" itemLabel="#{cid.nome}" />
+                                <f:converter binding="#{converterCidade}" />
+                            </p:selectOneMenu>
                         </p:panelGrid>
                     </div>
 
