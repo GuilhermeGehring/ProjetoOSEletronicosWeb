@@ -8,6 +8,7 @@ package br.edu.ifsul.controle;
 import br.edu.ifsul.dao.ProdutoDAO;
 import br.edu.ifsul.dao.ServicoDAO;
 import br.edu.ifsul.dao.EquipamentoDAO;
+import br.edu.ifsul.dao.ItemServicoDAO;
 import br.edu.ifsul.dao.OrdemServicoDAO;
 import br.edu.ifsul.dao.PessoaFisicaDAO;
 import br.edu.ifsul.dao.UsuarioDAO;
@@ -46,6 +47,9 @@ public class ControleOrdemServico implements Serializable {
 
     @EJB
     private ProdutoDAO daoProduto;// o .xhtml poderia referenciar diretamente o ControleProduto, caso o mesmo já exista
+
+    @EJB
+    private ItemServicoDAO daoItemServico;
 
     public ControleOrdemServico() {
 
@@ -90,6 +94,12 @@ public class ControleOrdemServico implements Serializable {
         } catch (Exception e) {
             Util.mensagemErro("Erro ao persistir objeto: "
                     + Util.getMensagemErro(e));
+        }
+    }
+
+    public void atualizaValorUnitario() {
+        if (itemServico.getValorUnitario() == null) {
+
         }
     }
 
@@ -148,27 +158,54 @@ public class ControleOrdemServico implements Serializable {
     public void setDaoProduto(ProdutoDAO daoProduto) {
         this.daoProduto = daoProduto;
     }
-    
+
     private ItemServico itemServico;
     private Boolean novoItemServico;
-	
-    public void novoItemServico(){
+
+    public void novoItemServico() {
         itemServico = new ItemServico();
         novoItemServico = true;
-    }    
-    public void alterarItemServico(int index){
+    }
+
+    public void alterarItemServico(int index) {
         itemServico = objeto.getItemServicos().get(index);
         novoItemServico = false;
-    }            
-    public void salvarItem(){
-        if (novoItemServico){
+    }
+
+    public void salvarItemServico() {
+        if (novoItemServico) {
             objeto.adicionarServico(itemServico);
         }
         Util.mensagemInformacao("Serviço adicionado com sucesso");
-    }                
-    public void removerItemServico(int index){
+    }
+
+    public void removerItemServico(int index) {
         objeto.removerServico(index);
         Util.mensagemInformacao("Serviço removido com sucesso");
     }
-    
+
+    public ItemServicoDAO getDaoItemServico() {
+        return daoItemServico;
+    }
+
+    public void setDaoItemServico(ItemServicoDAO daoItemServico) {
+        this.daoItemServico = daoItemServico;
+    }
+
+    public ItemServico getItemServico() {
+        return itemServico;
+    }
+
+    public void setItemServico(ItemServico itemServico) {
+        this.itemServico = itemServico;
+    }
+
+    public Boolean getNovoItemServico() {
+        return novoItemServico;
+    }
+
+    public void setNovoItemServico(Boolean novoItemServico) {
+        this.novoItemServico = novoItemServico;
+    }
+
 }

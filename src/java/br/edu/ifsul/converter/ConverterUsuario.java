@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package br.edu.ifsul.converter;
 
 import br.edu.ifsul.dao.UsuarioDAO;
@@ -10,32 +13,47 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Named;
 
-@Named(value = "converterUsuario") 
+/**
+ *
+ * @author Telmo
+ */
+
+@Named(value = "converterUsuario")
 @RequestScoped
-public class ConverterUsuario implements Serializable, Converter {
+public class ConverterUsuario  implements Serializable, Converter  {
     
     @EJB
-    private UsuarioDAO dao;
+    private UsuarioDAO dao; 
     
     public ConverterUsuario(){
         
     }
-    
+
     @Override
-    public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
-        if (string == null || string.equals("Selecione")){
+    public Object getAsObject(FacesContext context, UIComponent component, String value) {
+        
+        if(value == null || value.equals("Selecione") || value.equals("Selecione um registro")){
             return null;
         }
-       
-        return  dao.find(Integer.parseInt(string));
+        
+        Usuario pf = null;
+        try{
+            pf =  dao.getObjectById(value);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        
+        return pf;
     }
 
     @Override
-    public String getAsString(FacesContext fc, UIComponent uic, Object o) {
-        if (o == null){
+    public String getAsString(FacesContext context, UIComponent component, Object value) {
+         if(value == null){
             return null;
         }
-        Usuario obj = (Usuario) o;
-        return obj.getNomeUsuario();
+        
+        Usuario pf =  (Usuario) value;
+        return pf.getNomeUsuario();
     }
+    
 }

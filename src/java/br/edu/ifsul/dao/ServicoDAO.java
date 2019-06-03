@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 
  */
 package br.edu.ifsul.dao;
 
@@ -11,12 +9,12 @@ import javax.ejb.Stateful;
 
 /**
  *
- * @author 20171pf.cc0178
+ * @author Telmo
  */
 @Stateful
-public class ServicoDAO extends DAOGenerico<Servico> implements Serializable {
-
+public class ServicoDAO extends DAOGenerico<Servico> implements Serializable{
+    
     public ServicoDAO(){
-        super(Servico.class);              
+        super(Servico.class);
     }
 }

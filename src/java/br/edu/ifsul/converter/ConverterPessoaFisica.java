@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package br.edu.ifsul.converter;
 
 import br.edu.ifsul.dao.PessoaFisicaDAO;
@@ -10,7 +13,12 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.inject.Named;
 
-@Named(value = "converterPessoaFisica") 
+/**
+ *
+ * @author Telmo Junior
+ */
+
+@Named(value = "converterPessoaFisica")
 @RequestScoped
 public class ConverterPessoaFisica implements Serializable, Converter {
     
@@ -20,22 +28,36 @@ public class ConverterPessoaFisica implements Serializable, Converter {
     public ConverterPessoaFisica(){
         
     }
-    
+
     @Override
-    public Object getAsObject(FacesContext fc, UIComponent uic, String string) {
-        if (string == null || string.equals("Selecione")){
+    public Object getAsObject(FacesContext context, UIComponent component, String value) {
+        
+        if(value == null || value.equals("Selecione") || value.equals("Selecione um registro")){
             return null;
         }
+        
+        PessoaFisica pf =  dao.find(value);
+        return pf;
+        /*
+         String value que o usuário informou no campo de entrada e retorna um objeto que seja compatível com             o tipo da propriedade que está vinculado pelo atributo value do componente
+        */
        
-        return  dao.find(Integer.parseInt(string));
     }
 
     @Override
-    public String getAsString(FacesContext fc, UIComponent uic, Object o) {
-        if (o == null){
+    public String getAsString(FacesContext context, UIComponent component, Object value) {
+        
+        if(value == null){
             return null;
         }
-        PessoaFisica obj = (PessoaFisica) o;
-        return obj.getNomeUsuario();
+        
+        PessoaFisica pf =  (PessoaFisica) value;
+        return pf.getNomeUsuario();
+        
+        /*
+          a String retornada  será utilizada pelo componente JSF para ser exibida na tela do usuário.       
+         */
+        
     }
+    
 }

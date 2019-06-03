@@ -1,5 +1,5 @@
 /*
- * 
+ *
  */
 package br.edu.ifsul.dao;
 
@@ -13,12 +13,12 @@ import javax.ejb.Stateful;
  * @author Telmo
  */
 @Stateful
-public class UsuarioDAO extends DAOGenerico<Usuario> implements Serializable{
-    
-    public UsuarioDAO(){
-         super(Usuario.class);
-         
-        // inicializar as ordenações possiveis        
+public class UsuarioDAO extends DAOGenerico<Usuario> implements Serializable {
+
+    public UsuarioDAO() {
+        super(Usuario.class);
+
+        // inicializar as ordenações possiveis
         listaOrdem.add(new Ordem("nomeUsuario", "Nome Usuário", "="));
         listaOrdem.add(new Ordem("nome", "Nome", "like"));
         // definir qual a ordenação padrão no caso o segundo elemento da lista (indice 1)
@@ -26,10 +26,10 @@ public class UsuarioDAO extends DAOGenerico<Usuario> implements Serializable{
         // inicializar o conversor com a lista de ordens
         converterOrdem = new ConverterOrdem(listaOrdem);
     }
-    
+
     @Override
-    public Usuario getObjectById(Object id) throws Exception {                
-      return (Usuario) em.createNamedQuery("getUsuario").setParameter("paramNome", id).getResultList().get(0);
+    public Usuario getObjectById(Object id) throws Exception {
+        return (Usuario) em.createNamedQuery("getUsuario").setParameter("paramNome", id).getResultList().get(0);
     }
-    
+
 }

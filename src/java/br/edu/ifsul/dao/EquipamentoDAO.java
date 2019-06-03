@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package br.edu.ifsul.dao;
 
 import br.edu.ifsul.converter.ConverterOrdem;
@@ -5,12 +8,16 @@ import br.edu.ifsul.modelo.Equipamento;
 import java.io.Serializable;
 import javax.ejb.Stateful;
 
+/**
+ *
+ * @author Telmo
+ */
 @Stateful
 public class EquipamentoDAO extends DAOGenerico<Equipamento> implements Serializable {
     
     public EquipamentoDAO(){
         
-        super(Equipamento.class);   
+        super(Equipamento.class);
         
         // inicializar as ordenações possiveis        
         listaOrdem.add(new Ordem("id", "ID", "="));
@@ -19,5 +26,6 @@ public class EquipamentoDAO extends DAOGenerico<Equipamento> implements Serializ
         ordemAtual = listaOrdem.get(1);
         // inicializar o conversor com a lista de ordens
         converterOrdem = new ConverterOrdem(listaOrdem);
-    }    
+    }
+    
 }

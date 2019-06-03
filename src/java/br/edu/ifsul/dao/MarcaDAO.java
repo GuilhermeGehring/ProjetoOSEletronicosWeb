@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package br.edu.ifsul.dao;
 
 import br.edu.ifsul.converter.ConverterOrdem;
@@ -5,12 +8,16 @@ import br.edu.ifsul.modelo.Marca;
 import java.io.Serializable;
 import javax.ejb.Stateful;
 
+/**
+ *
+ * @author Telmo
+ */
 @Stateful
 public class MarcaDAO extends DAOGenerico<Marca> implements Serializable {
     
     public MarcaDAO(){
         
-        super(Marca.class);   
+        super(Marca.class);
         
         // inicializar as ordenações possiveis        
         listaOrdem.add(new Ordem("id", "ID", "="));
@@ -19,5 +26,8 @@ public class MarcaDAO extends DAOGenerico<Marca> implements Serializable {
         ordemAtual = listaOrdem.get(1);
         // inicializar o conversor com a lista de ordens
         converterOrdem = new ConverterOrdem(listaOrdem);
-    }    
+    }
+    
+    
+    
 }
