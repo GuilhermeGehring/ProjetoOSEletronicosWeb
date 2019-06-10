@@ -254,11 +254,14 @@
                     <f:selectItem itemLabel="Selecione um registro" noSelectionOption="true"/>
                     <f:selectItems value="#{controleOrdemServico.daoServico.listaTodos}"
                                    var="s" itemLabel="#{s.nome}"/>
+                    <p:ajax event="itemSelect" process="@this" listener="#{controleOrdemServico.atualizaValorUnitario()}" update="txtValorUnitarioServico"></p:ajax>
                 </p:selectOneMenu>
                 <p:outputLabel value="Quantidade" for="txtQuantidadeServico"/>
                 <p:inputNumber id="txtQuantidadeServico"
                                value="#{controleOrdemServico.itemServico.quantidade}"
-                               thousandSeparator="" decimalSeparator="." decimalPlaces="2" size="10"/>
+                               thousandSeparator="" decimalSeparator="." decimalPlaces="2" size="10">
+                    <p:ajax event="keyup" update="txtValorTotalServico" listener="#{controleOrdemServico.atualizaValorTotal()}" />
+                </p:inputNumber>
                 <p:outputLabel value="Valor Unitário" for="txtValorUnitarioServico"/>
                 <p:inputNumber id="txtValorUnitarioServico"
                                value="#{controleOrdemServico.itemServico.valorUnitario}"

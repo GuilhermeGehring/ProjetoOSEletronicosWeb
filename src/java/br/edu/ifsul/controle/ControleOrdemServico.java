@@ -111,12 +111,6 @@ public class ControleOrdemServico implements Serializable {
         }
     }
 
-    public void atualizaValorUnitario() {
-        if (itemServico.getValorUnitario() == null) {
-
-        }
-    }
-
     public void gerarParcelas() {
         objeto.getContasReceber().clear();
         objeto.gerarContasReceber();
@@ -279,6 +273,18 @@ public class ControleOrdemServico implements Serializable {
 
     public void setNovoItemServico(Boolean novoItemServico) {
         this.novoItemServico = novoItemServico;
+    }
+
+    public void atualizaValorUnitario() {
+        if (itemServico.getValorUnitario() == null) {
+            itemServico.setValorUnitario(itemServico.getServico().getValor());
+        }
+    }
+
+    public void atualizaValorTotal() {
+        if (itemServico.getValorUnitario() != null) {
+            itemServico.setValorTotal(itemServico.getValorUnitario() * itemServico.getQuantidade());
+        }
     }
 
     public Foto getFoto() {
